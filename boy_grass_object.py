@@ -42,23 +42,25 @@ def reset_world():
     global running
     global grass
     global team
+    global world
     running = True
+    world = []
     grass = Grass()  # 클래스를 이용해서 객체를 찍어냄.
+    world.append(grass)
     team = [Boy() for i in range(11)]  # 각각의 소년 11한명을 구현하기 위한 코드
+    world += team
 
 
 def render_world():
     clear_canvas()
-    grass.draw()
-    for boy in team:
-        boy.draw()
+    for o in world:
+        o.draw()
     update_canvas()
 
 
 def update_world():
-    grass.update()
-    for boy in team:
-        boy.update()
+    for o in world:
+        o.update()
     pass
 
 
