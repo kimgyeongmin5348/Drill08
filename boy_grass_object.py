@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 
 
 # Game object class here
@@ -12,10 +13,11 @@ class Grass:  # 클래스 이름은 대문자로 작성을 해야 한다.
     def update(self):
         pass
 
+
 class Boy:
     def __init__(self):
-        self.x, self.y = 0,90
-        self.frame = 0
+        self.x, self.y = random.randint(100,700), 90
+        self.frame = random.randint(0,7)
         self.image = load_image('run_animation.png')
 
     def update(self):
@@ -23,7 +25,8 @@ class Boy:
         self.x += 5
 
     def draw(self):
-        self.image.clip_draw(self.frame*100, 0, 100, 100, self.x, self.y)
+        self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
+
 
 def handle_events():
     global running
@@ -38,22 +41,24 @@ def handle_events():
 def reset_world():
     global running
     global grass
-    global boy
+    global team
     running = True
     grass = Grass()  # 클래스를 이용해서 객체를 찍어냄.
-    boy = Boy()
+    team = [Boy() for i in range(11)]  # 각각의 소년 11한명을 구현하기 위한 코드
 
 
 def render_world():
     clear_canvas()
     grass.draw()
-    boy.draw()
+    for boy in team:
+        boy.draw()
     update_canvas()
 
 
 def update_world():
     grass.update()
-    boy.update()
+    for boy in team:
+        boy.update()
     pass
 
 
