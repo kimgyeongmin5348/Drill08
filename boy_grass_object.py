@@ -2,14 +2,15 @@ from pico2d import *
 
 
 # Game object class here
-class Grass:
+class Grass: # 클래스 이름은 대문자로 작성을 해야 한다.
     def __init__(self):
         self.image = load_image('grass.png')
 
     def draw(self):
         self.image.draw(400, 30)
 
-    def update(self): pass
+    def update(self):
+        pass
 
 def handle_events():
     global running
@@ -23,15 +24,19 @@ def handle_events():
 
 def reset_world():
     global running
+    global grass
     running = True
+    grass = Grass()  # 클래스를 이용해서 객체를 찍어냄.
 
 
 def render_world():
     clear_canvas()
+    grass.draw()
     update_canvas()
 
 
 def update_world():
+    grass.update()
     pass
 
 
